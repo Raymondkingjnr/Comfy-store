@@ -12,18 +12,18 @@ import { NavLink } from "react-router-dom";
 
 const NavLinks = () => {
   return (
-    <div>
+    <>
       {links.map((link) => {
         const { id, url, text } = link;
         return (
           <li key={id}>
-            <NavLink to={url} className="capitalize">
+            <NavLink className="capitalize" to={url}>
               {text}
             </NavLink>
           </li>
         );
       })}
-    </div>
+    </>
   );
 };
 

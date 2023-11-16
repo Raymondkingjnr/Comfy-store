@@ -7,7 +7,7 @@ import NavLinks from "./NavLinks";
 const Navbar = () => {
   return (
     <nav className="bg-base-200">
-      <div className="navbar align-element">
+      <div className="navbar align-element ">
         <div className="navbar-start">
           <NavLink
             to={"/"}
@@ -29,7 +29,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal">
+          <ul className="menu menu-horizontal ">
             <NavLinks />
           </ul>
         </div>
