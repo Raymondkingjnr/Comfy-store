@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 const Pagination = () => {
   const { meta } = useLoaderData();
@@ -10,8 +10,14 @@ const Pagination = () => {
     return index + 1;
   });
 
+  const { search, pathname } = useLocation();
+
+  const navigate = useNavigate();
+
   const handlePageChange = (pageNumber) => {
-    console.log(pageNumber);
+    const searchParams = new URLSearchParams(search);
+    searchParams.set("page", pageNumber);
+    navigate(`${pathname} ? ${searchParams.toString()}`);
   };
 
   if (pageCount < 2) return null;
