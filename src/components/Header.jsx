@@ -1,19 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { clearCart } from "../features/cart/cartSlice";
+import { loginUser } from "../features/user/userSlice";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userState.user);
+
+  const handleLogout = () => {
+    navigate("/");
+    dispatch(clearCart());
+    dispatch(loginUser());
+  };
+
   return (
     <header className="bg-neutral py-2 text-neutral-content">
       <div className="align-element flex justify-center sm:justify-end">
-        {/* USER */}
-        <div className="flex gap-w-6 justify-center items-center">
-          <Link to={"/login"} className="link link-hover text-xs sm:text-sm">
-            sign in / Guest
-          </Link>
-          <Link to={"/login"} className="link link-hover text-xs sm:text-sm">
-            create account
-          </Link>
-        </div>
+        {user ? (
+          <div className="flex gap-2 sm:gap-x-8 items-center">
+            <p className="text-xs sm:text-sm">hello {user.useName}</p>
+            <button
+              className="btn btn-xs btn-outline btn-primary"
+              onClick={handleLogout}
+            >
+              logout
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-w-6 justify-center items-center">
+            <Link to={"/login"} className="link link-hover text-xs sm:text-sm">
+              sign in / Guest
+            </Link>
+            <Link to={"/login"} className="link link-hover text-xs sm:text-sm">
+              create account
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

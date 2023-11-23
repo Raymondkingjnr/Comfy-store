@@ -17,7 +17,7 @@ const Pagination = () => {
   const handlePageChange = (pageNumber) => {
     const searchParams = new URLSearchParams(search);
     searchParams.set("page", pageNumber);
-    navigate(`${pathname} ? ${searchParams.toString()}`);
+    navigate(`${pathname}?${searchParams.toString()}`);
   };
 
   if (pageCount < 2) return null;
@@ -27,7 +27,11 @@ const Pagination = () => {
       <div className="join">
         <button
           className="btn btn-xs sm:btn-md join-item"
-          onClick={() => handlePageChange("prev")}
+          onClick={() => {
+            let prevPage = page - 1;
+            if (prevPage < 1) prevPage = pageCount;
+            handlePageChange(prevPage);
+          }}
         >
           prev
         </button>
@@ -35,7 +39,11 @@ const Pagination = () => {
           return (
             <button
               key={pageNumber}
-              onClick={() => handlePageChange(pageNumber)}
+              onClick={() => {
+                let nextPage = page + 1;
+                if (nextPage > pageCount) nextPage = pageCount;
+                handlePageChange(nextPage);
+              }}
               className={`btn btn-xs sm:btn-md border-none join-item ${
                 pageNumber === page ? "bg-base-300 border-base-300" : ""
               }`}
