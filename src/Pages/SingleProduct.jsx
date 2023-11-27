@@ -68,7 +68,7 @@ const SingleProduct = () => {
           <h4 className="text-xl text-neutral-content font-bold mt-2">
             {company}
           </h4>
-          <p className="nt-3 text-xl">{nairaAmount}</p>
+          <p className="mt-3 text-xl">{nairaAmount}</p>
           <p className="mt-6 leading-8">{description}</p>
           {/* COLORS */}
           <div className="mt-6">
